@@ -15,15 +15,19 @@ class Main extends Component {
     super(props);
 
     this.state = {
-      imageJustUploadedUrl: ''
+      imageJustUploadedUrl: '',
+      lastTitle: '',
+      bookList: [
+        {title: 'seed data', url: 'https://static.pexels.com/photos/34950/pexels-photo.jpg'}
+      ]
     };
   }
 
-  addBook = (bookData) => {
+  addBook = (bookData, title) => {
     console.log(bookData);
 
 
-    fetch(PARSE_URL + '/files/' + bookData.title, {
+    fetch(PARSE_URL + '/files/' + bookData.filename, {
       headers: HEADERS,
       // only pass binary data
       body: bookData.pic,
@@ -32,7 +36,18 @@ class Main extends Component {
       return resp.json();
     }).then((message) => {
       console.log('book posted ', message);
-      this.setState({imageJustUploadedUrl: message.url})
+      this.setState({imageJustUploadedUrl: message.url, lastTitle: title })
+
+      //take img url and title and push into books collection once image is uploaded correctly
+      fetch(PARSE_URL + '/classes/books', {
+        headers: HEADERS,
+        body: JSON.stringify({title: this.state.lastTitle, imgUrl: this.state.imageJustUploadedUrl}),
+        method: 'POST'
+      }).then((resp) => {
+        return resp.json();
+      }).then((message) => {
+        console.log('message after book upload: ', message);
+      });
     });
   }
 
