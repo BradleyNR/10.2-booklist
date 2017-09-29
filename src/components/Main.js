@@ -64,6 +64,7 @@ class Main extends Component {
   render() {
     return(
       <div className='container-fluid'>
+        <h1 className='main-title'>Bookly</h1>
         <ImageUpload addBook={this.addBook} />
         <BookArea bookList={this.state.bookList}/>
       </div>

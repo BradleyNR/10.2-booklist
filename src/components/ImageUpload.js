@@ -54,16 +54,16 @@ class ImageUpload extends Component {
 
   render() {
     return (
-      <div className='row jumbotron'>
+      <div className='row search-area'>
           <div className='image-form col-md-12'>
             <div className='col-md-8'>
               <form onSubmit={this.handleSubmit}>
-                <label htmlFor='title' className='col-md-12'>Book Title:</label>
+                <label htmlFor='title' className='col-md-12 label-name'>Book Title:</label>
                 <input onChange={this.handleTitleChange} className='book-title col-md-12' id='title' placeholder='Title' value={this.state.title}/>
-                <label htmlFor='cover' className='col-md-12'>Book Cover:</label>
+                <label htmlFor='cover' className='col-md-12 label-name'>Book Cover:</label>
                 <input onChange={this.handleFilenameChange} className='image-filename col-md-8' id='cover' placeholder='Filename' value={this.state.filename}/>
                 <input className='image-input col-md-4' type='file' onChange={this.handleImagePreview} />
-                <button type='submit' className='col-md-6 btn btn-primary' onClick={this.handleSubmit}>Upload Image</button>
+                <button type='submit' className='col-md-6 btn btn-primary upload-button' onClick={this.handleSubmit}>Upload Image</button>
               </form>
             </div>
 
