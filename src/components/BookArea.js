@@ -24,8 +24,8 @@ class BookArea extends Component {
     let bookArray = this.props.bookList;
     let books = bookArray.map((item, index) => {
       return(
-        <div key={item.objectId} className='col-md-12'>
-          <h2 className='col-md-4' onClick={this.handleTitleClick}>{item.title}</h2>
+        <div key={item.objectId} className='col-md-12 individual-book'>
+          <h2 className='col-md-4'>{item.title}</h2>
           <img className={this.state.hidden} src={item.imgUrl}></img>
         </div>
 
@@ -33,9 +33,10 @@ class BookArea extends Component {
     });
 
     return(
-      <div className='row'>
-        <div className='col-md-8 col-md-offset-2'>
-          <h1 className='col-md-12'> Book Area </h1>
+      <div className='row book-area'>
+        <div className='col-md-10 col-md-offset-1'>
+          <h1 className='col-md-6'> Books: </h1>
+          <h1 onClick={this.handleTitleClick} className='col-md-6 show-covers-button'>Show Me Covers</h1>
           {books}
         </div>
       </div>

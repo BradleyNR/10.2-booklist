@@ -10,15 +10,40 @@
   margin-bottom: 30px;
 }
 
-.book-covers {
-  border: 10px solid black;
+/*Hiding file input*/
+.image-input {
+  width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
+
+/*style new file input*/
+.image-input + label {
+    font-size: 1.25em;
+    font-weight: 700;
+    color: #000;
+    background-color: #d7ccc8;
+    display: inline-block;
+    position: relative;
+    right: 5px;
+    padding-bottom: 1px;
+    padding-right: 5px;
+    padding-left: 5px;
+}
+
+.image-input:focus + label,
+.image-input + label:hover {
+    background-color: #2196f3;
 }
 
 div .search-area {
   background: linear-gradient( rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.3) ), url('https://upload.wikimedia.org/wikipedia/commons/2/2b/Bookshelf.jpg');
   background-size: cover;
-  height: 250px;
   padding-top: 25px;
+  padding-bottom: 25px;
 }
 
 .label-name {
@@ -30,4 +55,27 @@ div .search-area {
 
 .upload-button {
   margin-top: 10px;
+}
+
+.book-area {
+  width: 80%;
+  margin: auto;
+  margin-top: 20px;
+  border-radius: 5px;
+  background-color: #d7ccc8;
+}
+
+.individual-book {
+  color: #FFF;
+  background-color: #424242;
+  margin: 10px;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.show-covers-button {
+  border: 1px solid #000;
+  border-radius: 5px;
+  color: #FFF;
+  background-color: black;
 }

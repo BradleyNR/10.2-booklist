@@ -62,7 +62,8 @@ class ImageUpload extends Component {
                 <input onChange={this.handleTitleChange} className='book-title col-md-12' id='title' placeholder='Title' value={this.state.title}/>
                 <label htmlFor='cover' className='col-md-12 label-name'>Book Cover:</label>
                 <input onChange={this.handleFilenameChange} className='image-filename col-md-8' id='cover' placeholder='Filename' value={this.state.filename}/>
-                <input className='image-input col-md-4' type='file' onChange={this.handleImagePreview} />
+                <input className='image-input col-md-4' type='file' id='file' onChange={this.handleImagePreview} />
+                <label htmlFor='file'>Choose an Image</label>
                 <button type='submit' className='col-md-6 btn btn-primary upload-button' onClick={this.handleSubmit}>Upload Image</button>
               </form>
             </div>
