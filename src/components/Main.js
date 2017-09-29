@@ -1,14 +1,9 @@
 import React, { Component } from 'react';
 
 import ImageUpload from './ImageUpload.js';
+import BookArea from './BookArea.js';
 
-const HEADERS = {
-  'X-Parse-Application-Id': 'carson',
-  'X-Parse-REST-API-Key': 'naturarogue',
-  'X-Parse-Revocable-Session': 1
-}
-
-const PARSE_URL = 'https://naturals-test-parse-server.herokuapp.com'
+import PARSE_URL, {HEADERS} from '../parse.js';
 
 class Main extends Component {
   constructor(props){
@@ -23,10 +18,22 @@ class Main extends Component {
     };
   }
 
+  // grabbing data from server and passing to bookarea
+  componentDidMount(){
+    fetch(PARSE_URL + '/classes/books/', {
+      headers: HEADERS
+    }).then((response) => {
+      return response.json();
+    }).then((data) => {
+      console.log('data: ', data.results);
+      this.setState({bookList: data.results})
+    })
+  }
+
+
+  // upload book to parse, then upload book url + other data to different collection
   addBook = (bookData, title) => {
     console.log(bookData);
-
-
     fetch(PARSE_URL + '/files/' + bookData.filename, {
       headers: HEADERS,
       // only pass binary data
@@ -38,7 +45,7 @@ class Main extends Component {
       console.log('book posted ', message);
       this.setState({imageJustUploadedUrl: message.url, lastTitle: title })
 
-      //take img url and title and push into books collection once image is uploaded correctly
+      //take img url and title and upload to books collection once image is uploaded correctly
       fetch(PARSE_URL + '/classes/books', {
         headers: HEADERS,
         body: JSON.stringify({title: this.state.lastTitle, imgUrl: this.state.imageJustUploadedUrl}),
@@ -46,7 +53,9 @@ class Main extends Component {
       }).then((resp) => {
         return resp.json();
       }).then((message) => {
-        console.log('message after book upload: ', message);
+        let bookArray = this.state.bookList;
+        bookArray.push({title: this.state.lastTitle, imgUrl: this.state.imageJustUploadedUrl});
+        this.setState({bookList: bookArray, title: '', imgUrl: ''})
       });
     });
   }
@@ -54,9 +63,9 @@ class Main extends Component {
 
   render() {
     return(
-      <div>
-        <h1> Testing </h1>
+      <div className='container-fluid'>
         <ImageUpload addBook={this.addBook} />
+        <BookArea bookList={this.state.bookList}/>
       </div>
     )
   }

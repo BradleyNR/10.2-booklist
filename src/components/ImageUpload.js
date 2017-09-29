@@ -54,16 +54,24 @@ class ImageUpload extends Component {
 
   render() {
     return (
-      <div className='image-upload-area'>
-        <form onSubmit={this.handleSubmit}>
-          <input onChange={this.handleTitleChange} className='book-title' placeholder='Title' value={this.state.title}/>
-          <input onChange={this.handleFilenameChange} className='image-filename' placeholder='Filename' value={this.state.filename}/>
-          <input className='image-input' type='file' onChange={this.handleImagePreview} />
-          <button type='submit' onClick={this.handleSubmit}>Upload Image</button>
-        </form>
-        <div className='image-preview-area'>
-          <img src={this.state.imagePreview} alt='Book Cover'/>
-        </div>
+      <div className='row jumbotron'>
+          <div className='image-form col-md-12'>
+            <div className='col-md-8'>
+              <form onSubmit={this.handleSubmit}>
+                <label htmlFor='title' className='col-md-12'>Book Title:</label>
+                <input onChange={this.handleTitleChange} className='book-title col-md-12' id='title' placeholder='Title' value={this.state.title}/>
+                <label htmlFor='cover' className='col-md-12'>Book Cover:</label>
+                <input onChange={this.handleFilenameChange} className='image-filename col-md-8' id='cover' placeholder='Filename' value={this.state.filename}/>
+                <input className='image-input col-md-4' type='file' onChange={this.handleImagePreview} />
+                <button type='submit' className='col-md-6 btn btn-primary' onClick={this.handleSubmit}>Upload Image</button>
+              </form>
+            </div>
+
+            <div className='image-preview-area col-md-3'>
+              {this.state.imagePreview ? <img src={this.state.imagePreview} className='col-md-12' alt='Book Cover'/> : null}
+            </div>
+
+          </div>
       </div>
     )
   }
